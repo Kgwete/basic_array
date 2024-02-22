@@ -11,7 +11,8 @@ template<typename T, size_t Size_>
 class mArray
 {
     public:
-        //  Functions to deal with the contents class member
+        mArray() : Contents{}{}
+        //  Functions to deal with the 'Contents' class member variable
         const size_t Size(){ return Size_; }
 
         /*
@@ -20,11 +21,19 @@ class mArray
             arguments to insert into contents.
         */
         void Insert(const T& data, const int& pos){
+            if(pos < 0 || pos >= static_cast<int>(Size_)){
+                app_error("Invalid position for insertion");
+            }
             Contents[pos] = data;
         }
 
         // Function to print the contents of 'Contents' to console
         void Display(){
+            //    Could be helpful to check if the contents is empty or not
+            if(Size_ == 0){
+                app_info("Contents is not populated with data");
+                return;
+            }
             for(size_t i{0}; i<Size_; i++){
                 app_info(Contents[i]);
             }
@@ -39,6 +48,7 @@ class mArray
         T Contents[Size_];
 };
 
+//    Example usage
 int main()
 {
     mArray <std::string, 5> Names;
