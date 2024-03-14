@@ -102,15 +102,18 @@ class mArray
 //    Example usage
 int main()
 {
-    mArray <std::string, 5> Names;
+    mArray<std::string, 5> Names;
 
-    Names.Insert("Thabo",0);
-    Names.Insert("Tshepo",1);
-    Names.Insert("Jinet",2);
-    Names.Insert("Mavis",3);
-    Names.Insert("Petros",4);
+    Names.Insert("Thabo", 0);
+    Names.Insert("Tshepo", 1);
+    Names.Insert("Jinet", 2);
+    Names.Insert("Mavis", 3);
+    Names.Insert("Petros", 4);
 
-    Names.Display();
+    // Iterate through the array using the iterator
+    for (const auto& name : Names) {
+        app_info(name);
+    }
 
     return 0;
 }
