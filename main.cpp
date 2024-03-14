@@ -11,6 +11,57 @@ template<typename T, size_t Size_>
 class mArray
 {
     public:
+        // Iterator class
+        class Iterator {
+            public:
+                using iterator_category = std::forward_iterator_tag;
+                using value_type = T;
+                using difference_type = std::ptrdiff_t;
+                using pointer = T*;
+                using reference = T&;
+        
+                Iterator(pointer ptr) : currentPtr(ptr) {}
+        
+                reference operator*() const {
+                    return *currentPtr;
+                }
+    
+            Iterator& operator++() { 
+                ++currentPtr;
+                return *this;        
+            }
+    
+            Iterator operator++(int) {            
+                Iterator temp = *this;           
+                ++(*this);            
+                return temp;        
+            }
+    
+            bool operator==(const Iterator& other) const { return currentPtr == other.currentPtr; }
+            bool operator!=(const Iterator& other) const { return !(*this == other); }
+    
+            private:
+            pointer currentPtr;
+        };
+
+         // Functions to obtain iterators
+        Iterator begin() {
+            return Iterator(Contents);
+        }
+    
+        Iterator end() {
+            return Iterator(Contents + Size_);
+        }
+    
+        // Functions to obtain iterators
+        Iterator begin() {
+            return Iterator(Contents);
+        }
+    
+        Iterator end() {
+            return Iterator(Contents + Size_);
+        }
+
         mArray() : Contents{}{}
         //  Functions to deal with the 'Contents' class member variable
         const size_t Size(){ return Size_; }
